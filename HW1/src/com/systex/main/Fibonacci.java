@@ -9,11 +9,13 @@ public class Fibonacci {
     	int firstNum = 0;
     	int SecNum = 1;
     	
-    	int num = 0;
-    	System.out.print(firstNum + "\t" + SecNum + "\t");
+    	System.out.print("0\t");
+    	int num = firstNum + SecNum;
+    	
     	while(num < 1000) {	
-    		num = firstNum + SecNum;
     		System.out.print(num + "\t");
+    		num = firstNum + SecNum;
+    		
     		firstNum = SecNum;
     		SecNum = num;
     	}

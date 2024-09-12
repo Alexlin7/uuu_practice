@@ -98,6 +98,7 @@ public class Loop {
 			System.out.println();
 		}
 		for (int i = h; i >= 1; i--) {
+			if (i == h) continue;
 			for (int j = h; j > 1; j--) {
 				if (j > i) {
 					System.out.print(" \t");
