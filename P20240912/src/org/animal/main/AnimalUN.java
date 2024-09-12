@@ -3,6 +3,7 @@ package org.animal.main;
 import org.animal.model.Animal;
 import org.animal.model.Cat;
 import org.animal.model.Dog;
+import org.animal.model.Pet;
 import org.animal.model.米國人;
 
 public class AnimalUN {
@@ -22,6 +23,10 @@ public class AnimalUN {
 		
 		//雙邊會談(c, d);
 		多邊會談(c, d, a);
+		
+		Pet.foo();
+		d.bar();
+		d.baz();
 	}
 	
 	public static void 上台發言(Animal a) {
