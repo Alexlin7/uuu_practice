@@ -3,12 +3,16 @@ package com.systex.main;
 public class FindingPrimes {
 
 	public static void main(String[] args) {
-		for (int i = 0; i <= 1000; i++) {
+		int range = Integer.parseInt(args[0]);
+		int count = 0; 
+		for (int i = 0; i <= range; i++) {
 			if (isPrimeNum(i)) {
+				count += 1;
 				System.out.println(i);
 			}
 			
 		}
+		System.out.println("總共有：" + count + "個質數");
 	}
 	
 	public static boolean isPrimeNum(int n) {
