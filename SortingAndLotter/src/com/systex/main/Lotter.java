@@ -24,6 +24,10 @@ public class Lotter {
 	}
 
 	private static Set<Integer> generateLotterNum(Set<Integer> excludeNuberSet) {
+		if (excludeNuberSet.size() >= 49) {
+			throw new IllegalArgumentException("排除數字太多");
+		}
+
 		Set<Integer> lottery = new HashSet<>();
 
 		while (lottery.size() < 6) {
@@ -38,10 +42,6 @@ public class Lotter {
 	private static Set<Integer> parseExcludeNum(String excludeNumString) {
 		Set<Integer> excludeNuberSet = new HashSet<>();
 		String[] numberStrings = excludeNumString.split(" ");
-
-		if (numberStrings.length > 49) {
-			throw new IllegalArgumentException("排除數字太多");
-		}
 
 		for (String num : numberStrings) {
 			excludeNuberSet.add(Integer.parseInt(num.trim()));
