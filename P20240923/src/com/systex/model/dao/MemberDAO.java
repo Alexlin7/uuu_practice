@@ -13,6 +13,53 @@ import com.systex.model.Member;
 
 public class MemberDAO {
 
+	public void create(Member member) {		
+		try (Connection con = this.getConnection();
+				PreparedStatement preparedStatement = con.prepareStatement(" Insert Into member Values (?, ?, ?, ?, ?) ; ");
+		) {
+			preparedStatement.setInt(1, member.getId());
+			preparedStatement.setString(2, member.getFristName());
+			preparedStatement.setString(3, member.getLastName());
+			preparedStatement.setString(4, member.getStreet());
+			preparedStatement.setString(5, member.getCity());
+			int count = preparedStatement.executeUpdate();
+			if (count != 1) {
+				throw new SQLException("資料異動有問題");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		System.out.println("Member新增成功");
+	}
+	
+	public void update(Member member) {
+		String sql = """
+				 	 Update member
+				 	 Set FIRSTNAME = ?,
+				 	 	 LASTNAME = ?,
+				 	 	 STREET = ?,
+				 	 	 CITY = ?
+				 	 Where ID = ? ;
+					 """;
+		try (Connection con = this.getConnection();
+				PreparedStatement preparedStatement = con.prepareStatement(sql);) {
+			preparedStatement.setString(1, member.getFristName());
+			preparedStatement.setString(2, member.getLastName());
+			preparedStatement.setString(3, member.getStreet());
+			preparedStatement.setString(4, member.getCity());
+			preparedStatement.setInt(5, member.getId());
+			int count = preparedStatement.executeUpdate();
+			if (count != 1) {
+				throw new SQLException("資料異動有問題");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		System.out.println("Member新增成功");
+	}
+	
 	public Connection getConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -131,6 +178,16 @@ public class MemberDAO {
 		allMembers.forEach(System.out::println);
 		System.out.println("========================");
 		System.out.println(memberDAO.get(16));
-
+		System.out.println("==========");
+		Member member = new Member(50, "Micheal", "Jordan", "Wall Street Blvd", "New York");
+		memberDAO.create(member);
+		allMembers = memberDAO.getAll();
+		allMembers.forEach(System.out::println);
+		
+		member = new Member(50, "Micheal", "Jordan", "Wall Street Blvd", "New ");
+		memberDAO.update(member);
+		allMembers = memberDAO.getAll();
+		allMembers.forEach(System.out::println);
+		
 	}
 }
